@@ -11,9 +11,9 @@ services:
       - ./API:/app
     env_file:
       - ./API/.env
-    depends_on:
-      - db
-    
+    networks:
+      - app-network
+
   frontend:
     build:
       context: ./Frontend
@@ -24,9 +24,8 @@ services:
       - ./Frontend:/app
     depends_on:
       - api
-  
-  db:
-    image: sqlite:latest
-    container_name: sqlite_service
-    volumes:
-      - ./API/satisfaction.db:/app/satisfaction.db
+    networks:
+      - app-network
+
+networks:
+  app-network:

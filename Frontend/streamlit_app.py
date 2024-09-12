@@ -2,7 +2,7 @@ import streamlit as st
 import requests
 from enum import Enum
 
-API_URL = "http://localhost:8000"
+API_URL = "http://api:8000"
 
 class CustomerType(str, Enum):
     LOYAL = "Loyal Customer"
