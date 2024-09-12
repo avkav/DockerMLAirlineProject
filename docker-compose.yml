@@ -1,0 +1,32 @@
+version: '3.8'
+
+services:
+  api:
+    build:
+      context: ./API
+    container_name: fastapi_service
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./API:/app
+    env_file:
+      - ./API/.env
+    depends_on:
+      - db
+    
+  frontend:
+    build:
+      context: ./Frontend
+    container_name: streamlit_service
+    ports:
+      - "8501:8501"
+    volumes:
+      - ./Frontend:/app
+    depends_on:
+      - api
+  
+  db:
+    image: sqlite:latest
+    container_name: sqlite_service
+    volumes:
+      - ./API/satisfaction.db:/app/satisfaction.db
